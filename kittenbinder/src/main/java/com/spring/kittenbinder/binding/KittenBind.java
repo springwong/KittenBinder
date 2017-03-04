@@ -16,6 +16,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
+import static com.spring.kittenbinder.binding.KittenImageViewBind.setSrc;
+import static com.spring.kittenbinder.binding.KittenTextViewBind.setGravity;
+
 /**
  * Created by spring on 28/2/2017.
  */
@@ -71,9 +74,9 @@ public class KittenBind {
 
     public static void setStyle(View view, int styleResId, Context context) {
         final TypedArray ta = context.obtainStyledAttributes(styleResId, R.styleable.KittenView);
-        setBackground(view, ta);
-        setVisibility(view, ta);
-        setPadding(view, ta);
+        KittenViewBind.setBackground(view, ta);
+        KittenViewBind.setVisibility(view, ta);
+        KittenViewBind.setPadding(view, ta);
         if (view instanceof TextView){
             setGravity((TextView)view, ta);
         }
@@ -82,81 +85,6 @@ public class KittenBind {
         }
 
         ta.recycle();
-    }
-    private static void setSrc(ImageView view, TypedArray ta){
-        Drawable drawable = ta.getDrawable(R.styleable.KittenView_android_src);
-        if(drawable != null){
-            view.setImageDrawable(drawable);
-        }
-    }
-    private static void setBackground(View view , TypedArray ta){
-        final int backgroundColor = ta.getColor(R.styleable.KittenView_android_background, 0);
-        if (backgroundColor != -1) {
-            view.setBackgroundColor(backgroundColor);
-        }else{
-            Drawable drawable = ta.getDrawable(R.styleable.KittenView_android_background);
-            if(drawable != null){
-                int sdk = android.os.Build.VERSION.SDK_INT;
-                if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    view.setBackgroundDrawable(drawable);
-                } else {
-                    view.setBackground(drawable);
-                }
-
-            }
-        }
-    }
-    private static void setGravity(TextView textView, TypedArray ta){
-        final int gravity = ta.getInt(R.styleable.KittenView_android_gravity, -1);
-        if (gravity != -1 ) {
-            textView.setGravity(gravity);
-        }
-    }
-    private static void setVisibility(View view, TypedArray ta){
-        final int visibility = ta.getInt(R.styleable.KittenView_android_visibility, -1);
-        if (visibility != -1){
-            switch (visibility){
-                case 0:
-                    view.setVisibility(View.VISIBLE);
-                    break;
-                case 1:
-                    view.setVisibility(View.INVISIBLE);
-                    break;
-                case 2:
-                    view.setVisibility(View.GONE);
-                    break;
-            }
-        }
-    }
-    private static void setPadding(View view, TypedArray ta){
-        int paddingTop = 0;
-        int paddingRight = 0;
-        int paddingBottom = 0;
-        int paddingLeft = 0;
-        int value = ta.getDimensionPixelOffset(R.styleable.KittenView_android_padding, 0);
-        if (value != 0){
-            paddingTop = value;
-            paddingBottom = value;
-            paddingRight = value;
-            paddingLeft = value;
-        }
-        value = ta.getDimensionPixelOffset(R.styleable.KittenView_android_paddingLeft, 0);
-        if(value != 0){
-            paddingLeft = value;
-        }
-        value = ta.getDimensionPixelOffset(R.styleable.KittenView_android_paddingRight, 0);
-        if(value != 0){
-            paddingRight = value;
-        }
-        value = ta.getDimensionPixelOffset(R.styleable.KittenView_android_paddingTop, 0);
-        if(value != 0){
-            paddingTop = value;
-        }
-        value = ta.getDimensionPixelOffset(R.styleable.KittenView_android_paddingBottom, 0);
-        if(value != 0){
-            paddingBottom = value;
-        }
-        view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
     }
 
 }
