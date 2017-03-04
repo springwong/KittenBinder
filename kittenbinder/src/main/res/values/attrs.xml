@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="KittenView">
+        <!-- View attribute -->
+        <!-- padding : dimension-->
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingTop" />
+        <attr name="android:paddingRight" />
+        <attr name="android:paddingBottom" />
+        <attr name="android:padding" />
+
+        <!-- alpha : float-->
+        <attr name="android:alpha" />
+
+        <!-- background : drawable | color -->
+        <attr name="android:background" />
+
+        <!-- visibility : int 0,1,2 -->
+        <attr name="android:visibility" />
+
+        <!-- gravity : int -->
+        <attr name="android:gravity" />
+
+        <!-- src : drawable -->
+        <attr name="android:src" />
+
+        <!-- clickable : bool | reference -->
+        <attr name="android:clickable" />
+        <!-- End of View attribute -->
+    </declare-styleable>
+</resources>
