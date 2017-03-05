@@ -1,16 +1,18 @@
 package com.spring.kittenbinder.annotation;
 
-/**
- * Created by spring on 28/2/2017.
- */
+import android.support.annotation.DrawableRes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface BindContext {
-}
+/**
+ * Created by spring on 5/3/2017.
+ */
 
+@Retention(RetentionPolicy.CLASS)
+@Target(ElementType.FIELD)
+public @interface BindViewBackground {
+    @DrawableRes int value();
+}
