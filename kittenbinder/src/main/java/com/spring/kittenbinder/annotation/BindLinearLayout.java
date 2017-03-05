@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * Created by spring on 5/3/2017.
  */
 
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface BindLinearLayout {
     int value() default LinearLayout.VERTICAL;
