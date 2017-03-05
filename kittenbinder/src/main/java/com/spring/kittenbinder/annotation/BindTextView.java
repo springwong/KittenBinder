@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface BindTextView {
     @StringRes int value();
-    @DimenRes int textSize();
+    @DimenRes int textSize() default -1;
 
     int gravity() default Gravity.LEFT;
 //    int textAlignment();

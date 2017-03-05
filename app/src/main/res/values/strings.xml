@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KittenBinder</string>
+    <string name="sample1">Hello World</string>
 </resources>

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.spring.kittenbinder.R;
@@ -16,6 +17,7 @@ import com.spring.kittenbinder.annotation.BindBackground;
 import com.spring.kittenbinder.annotation.BindContext;
 import com.spring.kittenbinder.annotation.BindEditText;
 import com.spring.kittenbinder.annotation.BindImageView;
+import com.spring.kittenbinder.annotation.BindLinearLayout;
 import com.spring.kittenbinder.annotation.BindPadding;
 import com.spring.kittenbinder.annotation.BindStyle;
 import com.spring.kittenbinder.annotation.BindTextAppearance;
@@ -60,6 +62,7 @@ public class KittenBind {
             bindTextAppearance(view, field, context);
             bindTextView(view, field, context);
             bindEditText(view, field, context);
+            bindLinearLayout(view, field, context);
         }
     }
 
@@ -161,14 +164,25 @@ public class KittenBind {
             view.setPadding(left, top, right, bottom);
         }
     }
+    public static void bindLinearLayout(View view, Field field, Context context){
+        if(view instanceof LinearLayout){
+            BindLinearLayout bind = field.getAnnotation(BindLinearLayout.class);
+            if(bind!=null){
+                LinearLayout linearLayout = (LinearLayout)view;
+                linearLayout.setOrientation(bind.value() == LinearLayout.VERTICAL ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL);
+            }
+        }
+    }
     public static void bindTextView(View view, Field field, Context context){
         if(view instanceof TextView){
             BindTextView bind = field.getAnnotation(BindTextView.class);
             if(bind!=null){
                 TextView textView = (TextView) view;
                 textView.setText(bind.value());
-                float textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, bind.textSize(), context.getResources().getDisplayMetrics());
-                textView.setTextSize(textSize);
+                if(bind.textSize()!=-1){
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(bind.textSize()));
+                }
+
                 if(bind.minLines() != -1){
                     textView.setMinLines(bind.minLines());
                 }
