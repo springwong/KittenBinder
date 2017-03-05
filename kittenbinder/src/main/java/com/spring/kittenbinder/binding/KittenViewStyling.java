@@ -1,8 +1,11 @@
 package com.spring.kittenbinder.binding;
 
+import android.annotation.TargetApi;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.spring.kittenbinder.R;
 
@@ -10,7 +13,8 @@ import com.spring.kittenbinder.R;
  * Created by spring on 4/3/2017.
  */
 
-final class KittenViewBind {
+final class KittenViewStyling {
+    @SuppressWarnings("deprecation")
     static void setBackground(View view , TypedArray ta){
         if(ta.hasValue(R.styleable.KittenView_android_background)){
             Drawable drawable = ta.getDrawable(R.styleable.KittenView_android_background);
@@ -19,32 +23,21 @@ final class KittenViewBind {
                 if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                     view.setBackgroundDrawable(drawable);
                 } else {
-                    view.setBackground(drawable);
+                    setBackgroundDrawable(view, drawable);
                 }
             }else {
                 final int backgroundColor = ta.getColor(R.styleable.KittenView_android_background, 0);
                 view.setBackgroundColor(backgroundColor);
             }
         }
-
+    }
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    static void setBackgroundDrawable(View view, Drawable drawable){
+        view.setBackground(drawable);
     }
     static void setVisibility(View view, TypedArray ta){
         if(ta.hasValue(R.styleable.KittenView_android_visibility)){
             final int visibility = ta.getInt(R.styleable.KittenView_android_visibility, -1);
-            switch (visibility){
-                case 0:
-                    view.setVisibility(View.VISIBLE);
-                    break;
-                case 1:
-                    view.setVisibility(View.INVISIBLE);
-                    break;
-                case 2:
-                    view.setVisibility(View.GONE);
-                    break;
-            }
-        }
-        final int visibility = ta.getInt(R.styleable.KittenView_android_visibility, -1);
-        if (visibility != -1){
             switch (visibility){
                 case 0:
                     view.setVisibility(View.VISIBLE);

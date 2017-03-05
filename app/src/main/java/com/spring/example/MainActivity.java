@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout mainView;
     @BindContext
     @BindBackground(android.R.color.holo_red_dark)
-            @BindVisibility(View.GONE)
+    @BindVisibility(View.VISIBLE)
     TextView textView;
 
     @Override
@@ -29,6 +29,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mainView);
         mainView.addView(textView);
         textView.setText("Testing text");
-        textView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
     }
 }

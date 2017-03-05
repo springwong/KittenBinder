@@ -9,7 +9,7 @@ import com.spring.kittenbinder.R;
  * Created by spring on 4/3/2017.
  */
 
-final class KittenTextViewBind {
+final class KittenTextViewStyling {
     public static void setGravity(TextView textView, TypedArray ta){
         final int gravity = ta.getInt(R.styleable.KittenView_android_gravity, -1);
         if (gravity != -1 ) {

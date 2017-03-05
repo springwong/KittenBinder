@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
@@ -16,6 +14,7 @@ import android.widget.TextView;
 import com.spring.kittenbinder.R;
 import com.spring.kittenbinder.annotation.BindBackground;
 import com.spring.kittenbinder.annotation.BindContext;
+import com.spring.kittenbinder.annotation.BindEditText;
 import com.spring.kittenbinder.annotation.BindImageView;
 import com.spring.kittenbinder.annotation.BindPadding;
 import com.spring.kittenbinder.annotation.BindStyle;
@@ -23,12 +22,14 @@ import com.spring.kittenbinder.annotation.BindTextAppearance;
 import com.spring.kittenbinder.annotation.BindTextView;
 import com.spring.kittenbinder.annotation.BindVisibility;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
-import static com.spring.kittenbinder.binding.KittenImageViewBind.setSrc;
-import static com.spring.kittenbinder.binding.KittenTextViewBind.setGravity;
+import static com.spring.kittenbinder.binding.KittenImageViewStyling.setSrc;
+import static com.spring.kittenbinder.binding.KittenTextViewStyling.setGravity;
 
 /**
  * Created by spring on 28/2/2017.
@@ -58,6 +59,7 @@ public class KittenBind {
             bindImageView(view, field, context);
             bindTextAppearance(view, field, context);
             bindTextView(view, field, context);
+            bindEditText(view, field, context);
         }
     }
 
@@ -83,6 +85,17 @@ public class KittenBind {
         }
         return null;
     }
+    public static void bindEditText(View view, Field field, Context context) {
+        if(view instanceof TextView){
+            TextView textView = (TextView)view;
+            BindEditText bind = field.getAnnotation(BindEditText.class);
+            if(bind!=null){
+                textView.setSingleLine(bind.isSingleLine());
+                textView.setHint(bind.hint());
+            }
+        }
+
+    }
     public static void bindBackground(View view, Field field, Context context) {
         BindBackground bind = field.getAnnotation(BindBackground.class);
         if(bind!=null){
@@ -105,6 +118,7 @@ public class KittenBind {
             }
         }
     }
+    @SuppressWarnings("deprecation")
     public static void bindTextAppearance(View view, Field field, Context context){
         if(view instanceof TextView){
             BindTextAppearance bind = field.getAnnotation(BindTextAppearance.class);
@@ -174,9 +188,9 @@ public class KittenBind {
 
     public static void setStyle(View view, int styleResId, Context context) {
         final TypedArray ta = context.obtainStyledAttributes(styleResId, R.styleable.KittenView);
-        KittenViewBind.setBackground(view, ta);
-        KittenViewBind.setVisibility(view, ta);
-        KittenViewBind.setPadding(view, ta);
+        KittenViewStyling.setBackground(view, ta);
+        KittenViewStyling.setVisibility(view, ta);
+        KittenViewStyling.setPadding(view, ta);
         if (view instanceof TextView){
             setGravity((TextView)view, ta);
         }
