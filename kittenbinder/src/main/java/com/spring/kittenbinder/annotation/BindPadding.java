@@ -11,5 +11,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
 public @interface BindPadding {
-    int padding();
+    int value();
+    int left() default Integer.MIN_VALUE;
+    int top() default Integer.MIN_VALUE;
+    int right() default Integer.MIN_VALUE;
+    int bottom() default Integer.MIN_VALUE;
 }

@@ -141,10 +141,25 @@ public class KittenBind {
     public static void bindPadding(View view, Field field, Context context){
         BindPadding bind = field.getAnnotation(BindPadding.class);
         if(bind!=null){
-            int padding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, bind.padding(), context.getResources().getDisplayMetrics());
-            view.setPadding(padding, padding, padding, padding);
+            int padding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, bind.value(), context.getResources().getDisplayMetrics());
+            int top = padding;
+            int left = padding;
+            int bottom = padding;
+            int right = padding;
+            if(bind.left() != Integer.MIN_VALUE){
+                left = bind.left();
+            }
+            if(bind.top() != Integer.MIN_VALUE){
+                top = bind.top();
+            }
+            if(bind.right() != Integer.MIN_VALUE){
+                right = bind.right();
+            }
+            if(bind.bottom() != Integer.MIN_VALUE){
+                bottom = bind.bottom();
+            }
+            view.setPadding(left, top, right, bottom);
         }
-
     }
     public static void bindTextView(View view, Field field, Context context){
         if(view instanceof TextView){
@@ -186,6 +201,7 @@ public class KittenBind {
         }
     }
 
+    //todo : long way to fill all fields assignment
     public static void setStyle(View view, int styleResId, Context context) {
         final TypedArray ta = context.obtainStyledAttributes(styleResId, R.styleable.KittenView);
         KittenViewStyling.setBackground(view, ta);
