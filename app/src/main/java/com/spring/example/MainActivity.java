@@ -1,9 +1,12 @@
 package com.spring.example;
 
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -66,9 +69,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        long benchmarkStart = System.currentTimeMillis();
+        View benchmark = LayoutInflater.from(this).inflate(R.layout.benchmark, null, false);
+        Log.d("KittenBinder", "" + (System.currentTimeMillis() - benchmarkStart));
+
+        long start = System.currentTimeMillis();
         KittenBind.bind(this);
+        Log.d("KittenBinder", "" + (System.currentTimeMillis() - start));
         setContentView(mainView);
 
+        mainView.setOrientation(LinearLayout.VERTICAL);
         mainView.addView(textView);
         mainView.addView(textView2);
         mainView.addView(imageView);
@@ -80,5 +91,22 @@ public class MainActivity extends AppCompatActivity {
         mainView.addView(btn);
 
         textView.setText("Testing text");
+        mainView.addView(benchmark);
+        benchmark.findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long benchmarkStart = System.currentTimeMillis();
+                for(int i = 0 ; i < 1000; i++){
+                    View benchmark = LayoutInflater.from(MainActivity.this).inflate(R.layout.benchmark, null, false);
+                }
+                Log.d("KittenBinder", "" + (System.currentTimeMillis() - benchmarkStart));
+
+                long start = System.currentTimeMillis();
+                for(int i = 0 ; i < 1000; i++){
+                    KittenBind.bind(MainActivity.this);
+                }
+                Log.d("KittenBinder", "" + (System.currentTimeMillis() - start));
+            }
+        });
     }
 }
