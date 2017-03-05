@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -182,7 +183,9 @@ public class KittenBind {
                 if(bind.textSize()!=-1){
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(bind.textSize()));
                 }
-
+                if(bind.textColor() != -1) {
+                    textView.setTextColor(ContextCompat.getColor(context,bind.textColor()));
+                }
                 if(bind.minLines() != -1){
                     textView.setMinLines(bind.minLines());
                 }
@@ -191,6 +194,9 @@ public class KittenBind {
                 }
                 if(bind.lines() != -1){
                     textView.setLines(bind.lines());
+                }
+                if(bind.gravity() != -1){
+                    textView.setGravity(bind.gravity());
                 }
             }
 

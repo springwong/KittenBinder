@@ -1,5 +1,6 @@
 package com.spring.kittenbinder.annotation;
 
+import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.Dimension;
 import android.support.annotation.IntDef;
@@ -21,8 +22,9 @@ import java.lang.annotation.Target;
 public @interface BindTextView {
     @StringRes int value();
     @DimenRes int textSize() default -1;
+    @ColorRes int textColor() default -1;
 
-    int gravity() default Gravity.LEFT;
+    int gravity() default -1;
 //    int textAlignment();
     int minLines() default -1;
     int maxLines() default -1;

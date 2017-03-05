@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface BindImageView {
     @DrawableRes int value();
-    boolean adjustViewBounds();
-    ImageView.ScaleType scaleType();
+    boolean adjustViewBounds() default false;
+    ImageView.ScaleType scaleType() default ImageView.ScaleType.FIT_CENTER;
 
 }
