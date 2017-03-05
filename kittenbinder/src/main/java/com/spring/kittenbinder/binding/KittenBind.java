@@ -54,7 +54,6 @@ public class KittenBind {
     public static void bind(Object object, Context context) {
         Field[] fields = object.getClass().getDeclaredFields();
         for (Field field : fields) {
-            field.getA
             View view = bindContext(object, field, context);;
             bindStyle(view, field, context);
             bindPadding(view, field, context);
