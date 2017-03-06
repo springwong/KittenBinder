@@ -53,11 +53,19 @@ public class KittenBinderProcessor extends AbstractProcessor{
     }
 
     @Override
+    public Set<String> getSupportedOptions() {
+        return super.getSupportedOptions();
+    }
+
+    @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment env) {
         Collection<? extends Element> annotatedElements =  env.getElementsAnnotatedWith(BindTest.class);
         List<VariableElement> fields = ElementFilter.fieldsIn(annotatedElements);
 
         ClassName bindingClassName = null;
+        if (fields.size() == 0){
+            return false;
+        }
         for(VariableElement element : fields){
 //            element
             TypeElement enclosingElement = (TypeElement) element.getEnclosingElement();
@@ -65,6 +73,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
             String className = enclosingElement.getQualifiedName().toString().substring(
                     packageName.length() + 1).replace('.', '$');
             bindingClassName = ClassName.get(packageName, className + "_ViewDecorator");
+            break;
         }
         JavaFile javaFile = JavaFile.builder(bindingClassName.packageName(), createType(0, bindingClassName)).build();
         try {
