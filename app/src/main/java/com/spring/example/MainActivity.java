@@ -30,6 +30,7 @@ import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import kittenbinder.BindTest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,26 +74,29 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.benchA)
     TextView benchA;
-    @BindView(R.id.benchB)
-    TextView benchB;
-    @BindView(R.id.benchC)
-    ImageView benchC;
-    @BindView(R.id.benchD)
-    EditText benchD;
-    @BindView(R.id.benchE)
-    TextView benchE;
-    @BindView(R.id.benchF)
-    TextView benchF;
-    @BindView(R.id.btn)
-    TextView benchMarkButton;
+//    @BindView(R.id.benchB)
+//    TextView benchB;
+//    @BindView(R.id.benchC)
+//    ImageView benchC;
+//    @BindView(R.id.benchD)
+//    EditText benchD;
+//    @BindView(R.id.benchE)
+//    TextView benchE;
+//    @BindView(R.id.benchF)
+//    TextView benchF;
+//    @BindView(R.id.btn)
+//    TextView benchMarkButton;
+
+    @BindTest
+    TextView testView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final View benchmark = LayoutInflater.from(this).inflate(R.layout.benchmark, null, false);
-        ButterKnife.bind(this, benchmark);
         KittenBind.bind(this);
+        ButterKnife.bind(this, benchmark);
         setContentView(mainView);
 
         mainView.setOrientation(LinearLayout.VERTICAL);
@@ -108,30 +112,30 @@ public class MainActivity extends AppCompatActivity {
 
         textView.setText("Testing text");
         mainView.addView(benchmark);
-        benchMarkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                long benchmarkStart = System.currentTimeMillis();
-                for(int i = 0 ; i < 1000; i++){
-                    View benchmark = LayoutInflater.from(MainActivity.this).inflate(R.layout.benchmark, null, false);
-                    ButterKnife.bind(this, benchmark);
-                }
-                Log.d("KittenBinder", "Layout Inflate:" + (System.currentTimeMillis() - benchmarkStart));
-
-                long start = System.currentTimeMillis();
-                for(int i = 0 ; i < 1000; i++){
-                    KittenBind.bind(MainActivity.this);
-                }
-                Log.d("KittenBinder", "Kitten Builder:" + (System.currentTimeMillis() - start));
-
-                long test = System.currentTimeMillis();
-                for(int i = 0 ; i < 1000; i++){
-                    createByCode();
-                }
-                Log.d("KittenBinder", "Pure Coding:" + (System.currentTimeMillis() - test));
-
-            }
-        });
+//        benchMarkButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                long benchmarkStart = System.currentTimeMillis();
+//                for(int i = 0 ; i < 1000; i++){
+//                    View benchmark = LayoutInflater.from(MainActivity.this).inflate(R.layout.benchmark, null, false);
+//                    ButterKnife.bind(this, benchmark);
+//                }
+//                Log.d("KittenBinder", "Layout Inflate:" + (System.currentTimeMillis() - benchmarkStart));
+//
+//                long start = System.currentTimeMillis();
+//                for(int i = 0 ; i < 1000; i++){
+//                    KittenBind.bind(MainActivity.this);
+//                }
+//                Log.d("KittenBinder", "Kitten Builder:" + (System.currentTimeMillis() - start));
+//
+//                long test = System.currentTimeMillis();
+//                for(int i = 0 ; i < 1000; i++){
+//                    createByCode();
+//                }
+//                Log.d("KittenBinder", "Pure Coding:" + (System.currentTimeMillis() - test));
+//
+//            }
+//        });
     }
 
     private void createByCode(){
