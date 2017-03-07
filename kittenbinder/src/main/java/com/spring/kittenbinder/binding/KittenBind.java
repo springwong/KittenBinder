@@ -52,19 +52,19 @@ public class KittenBind {
         bind(fragment, fragment.getActivity());
     }
     public static void bind(Object object, Context context) {
-//        Field[] fields = object.getClass().getDeclaredFields();
-//        for (Field field : fields) {
-//            View view = bindContext(object, field, context);;
-//            bindStyle(view, field, context);
-//            bindPadding(view, field, context);
-//            bindVisibility(view, field, context);
-//            bindBackground(view ,field, context);
-//            bindImageView(view, field, context);
-//            bindTextAppearance(view, field, context);
-//            bindTextView(view, field, context);
-//            bindEditText(view, field, context);
-//            bindLinearLayout(view, field, context);
-//        }
+        Field[] fields = object.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            View view = bindContext(object, field, context);;
+            bindStyle(view, field, context);
+            bindPadding(view, field, context);
+            bindVisibility(view, field, context);
+            bindBackground(view ,field, context);
+            bindImageView(view, field, context);
+            bindTextAppearance(view, field, context);
+            bindTextView(view, field, context);
+            bindEditText(view, field, context);
+            bindLinearLayout(view, field, context);
+        }
     }
 
     public static View bindContext(Object object, Field field, Context context){

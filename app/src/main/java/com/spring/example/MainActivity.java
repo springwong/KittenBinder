@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindTest
     TextView testView;
+    @BindTest
+    ImageView string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mainView);
 
         mainView.setOrientation(LinearLayout.VERTICAL);
+        new MainActivity_ViewDecorator().bind(this, this);
+        testView.setText("I am alive from binding!");
+
+        mainView.addView(testView);
         mainView.addView(textView);
         mainView.addView(textView2);
         mainView.addView(imageView);
