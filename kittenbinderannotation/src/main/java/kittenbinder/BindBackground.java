@@ -1,4 +1,4 @@
-package com.spring.kittenbinder.annotation;
+package kittenbinder;
 
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;

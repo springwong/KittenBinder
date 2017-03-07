@@ -1,6 +1,5 @@
-package com.spring.kittenbinder.annotation;
+package kittenbinder;
 
-import android.support.annotation.IdRes;
 import android.support.annotation.StyleRes;
 
 import java.lang.annotation.ElementType;
@@ -14,6 +13,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface BindTextAppearance {
+public @interface BindStyle {
     @StyleRes int value();
 }

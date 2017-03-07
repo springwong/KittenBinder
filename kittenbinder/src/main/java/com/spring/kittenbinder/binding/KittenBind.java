@@ -14,18 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.spring.kittenbinder.R;
-import com.spring.kittenbinder.annotation.BindBackground;
-import com.spring.kittenbinder.annotation.BindContext;
-import com.spring.kittenbinder.annotation.BindEditText;
-import com.spring.kittenbinder.annotation.BindImageView;
-import com.spring.kittenbinder.annotation.BindLinearLayout;
-import com.spring.kittenbinder.annotation.BindPadding;
-import com.spring.kittenbinder.annotation.BindStyle;
-import com.spring.kittenbinder.annotation.BindTextAppearance;
-import com.spring.kittenbinder.annotation.BindTextView;
-import com.spring.kittenbinder.annotation.BindVisibility;
-
-import org.w3c.dom.Text;
+import kittenbinder.BindBackground;
+import kittenbinder.BindContext;
+import kittenbinder.BindEditText;
+import kittenbinder.BindImageView;
+import kittenbinder.BindLinearLayout;
+import kittenbinder.BindPadding;
+import kittenbinder.BindStyle;
+import kittenbinder.BindTextAppearance;
+import kittenbinder.BindTextView;
+import kittenbinder.BindVisibility;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

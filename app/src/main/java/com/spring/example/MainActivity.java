@@ -1,11 +1,8 @@
 package com.spring.example;
 
-import android.media.Image;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,22 +12,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.spring.kittenbinder.annotation.BindBackground;
-import com.spring.kittenbinder.annotation.BindContext;
-import com.spring.kittenbinder.annotation.BindEditText;
-import com.spring.kittenbinder.annotation.BindImageView;
-import com.spring.kittenbinder.annotation.BindLinearLayout;
-import com.spring.kittenbinder.annotation.BindPadding;
-import com.spring.kittenbinder.annotation.BindTextAppearance;
-import com.spring.kittenbinder.annotation.BindTextView;
-import com.spring.kittenbinder.annotation.BindVisibility;
-import com.spring.kittenbinder.binding.KittenBind;
+import kittenbinder.BindBackground;
+import kittenbinder.BindContext;
+import kittenbinder.BindEditText;
+import kittenbinder.BindImageView;
+import kittenbinder.BindLinearLayout;
+import kittenbinder.BindPadding;
+import kittenbinder.BindTextAppearance;
+import kittenbinder.BindTextView;
 
-import org.w3c.dom.Text;
+import com.spring.kittenbinder.binding.KittenBind;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import kittenbinder.BindTest;
+import kittenbinder.BindVisibility;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     @BindContext
     @BindPadding(10)
+    @BindVisibility(View.VISIBLE)
     @BindBackground(android.R.color.holo_red_dark)
     TextView textView;
 
