@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
  * Created by spring on 5/3/2017.
  */
 
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
 public @interface BindTextAppearance {
-    @StyleRes int value();
+    @StyleRes int value() default -1;
 }

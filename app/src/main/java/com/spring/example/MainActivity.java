@@ -3,6 +3,7 @@ package com.spring.example;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,7 +26,6 @@ import com.spring.kittenbinder.binding.KittenBind;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import kittenbinder.BindTest;
 import kittenbinder.BindVisibility;
 
 public class MainActivity extends AppCompatActivity {
@@ -71,23 +71,18 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.benchA)
     TextView benchA;
-//    @BindView(R.id.benchB)
-//    TextView benchB;
-//    @BindView(R.id.benchC)
-//    ImageView benchC;
-//    @BindView(R.id.benchD)
-//    EditText benchD;
-//    @BindView(R.id.benchE)
-//    TextView benchE;
-//    @BindView(R.id.benchF)
-//    TextView benchF;
-//    @BindView(R.id.btn)
-//    TextView benchMarkButton;
-
-    @BindTest
-    TextView testView;
-    @BindTest
-    ImageView string;
+    @BindView(R.id.benchB)
+    TextView benchB;
+    @BindView(R.id.benchC)
+    ImageView benchC;
+    @BindView(R.id.benchD)
+    EditText benchD;
+    @BindView(R.id.benchE)
+    TextView benchE;
+    @BindView(R.id.benchF)
+    TextView benchF;
+    @BindView(R.id.btn)
+    TextView benchMarkButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,13 +91,11 @@ public class MainActivity extends AppCompatActivity {
         final View benchmark = LayoutInflater.from(this).inflate(R.layout.benchmark, null, false);
         KittenBind.bind(this);
         ButterKnife.bind(this, benchmark);
+//        new MainActivity_ViewDecorator().bind(this, this);
         setContentView(mainView);
 
         mainView.setOrientation(LinearLayout.VERTICAL);
-        new MainActivity_ViewDecorator().bind(this, this);
-        testView.setText("I am alive from binding!");
 
-        mainView.addView(testView);
         mainView.addView(textView);
         mainView.addView(textView2);
         mainView.addView(imageView);
@@ -115,30 +108,36 @@ public class MainActivity extends AppCompatActivity {
 
         textView.setText("Testing text");
         mainView.addView(benchmark);
-//        benchMarkButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                long benchmarkStart = System.currentTimeMillis();
-//                for(int i = 0 ; i < 1000; i++){
-//                    View benchmark = LayoutInflater.from(MainActivity.this).inflate(R.layout.benchmark, null, false);
-//                    ButterKnife.bind(this, benchmark);
-//                }
-//                Log.d("KittenBinder", "Layout Inflate:" + (System.currentTimeMillis() - benchmarkStart));
-//
-//                long start = System.currentTimeMillis();
-//                for(int i = 0 ; i < 1000; i++){
-//                    KittenBind.bind(MainActivity.this);
-//                }
-//                Log.d("KittenBinder", "Kitten Builder:" + (System.currentTimeMillis() - start));
-//
-//                long test = System.currentTimeMillis();
-//                for(int i = 0 ; i < 1000; i++){
-//                    createByCode();
-//                }
-//                Log.d("KittenBinder", "Pure Coding:" + (System.currentTimeMillis() - test));
-//
-//            }
-//        });
+        benchMarkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long benchmarkStart = System.currentTimeMillis();
+                for(int i = 0 ; i < 1000; i++){
+                    View benchmark = LayoutInflater.from(MainActivity.this).inflate(R.layout.benchmark, null, false);
+                    ButterKnife.bind(this, benchmark);
+                }
+                Log.d("KittenBinder", "Layout Inflate:" + (System.currentTimeMillis() - benchmarkStart));
+
+                long decoratorTime = System.currentTimeMillis();
+                for(int i = 0 ; i < 1000; i++){
+                    new MainActivity_ViewDecorator().bind(MainActivity.this, MainActivity.this);
+                }
+                Log.d("KittenBinder", "New Decorator:" + (System.currentTimeMillis() - decoratorTime));
+
+                long start = System.currentTimeMillis();
+                for(int i = 0 ; i < 1000; i++){
+                    KittenBind.bind(MainActivity.this);
+                }
+                Log.d("KittenBinder", "Kitten Builder:" + (System.currentTimeMillis() - start));
+
+                long test = System.currentTimeMillis();
+                for(int i = 0 ; i < 1000; i++){
+                    createByCode();
+                }
+                Log.d("KittenBinder", "Pure Coding:" + (System.currentTimeMillis() - test));
+
+            }
+        });
     }
 
     private void createByCode(){

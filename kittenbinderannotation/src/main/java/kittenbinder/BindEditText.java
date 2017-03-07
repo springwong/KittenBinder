@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 /**
  * Created by spring on 5/3/2017.
  */
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
 public @interface BindEditText {
-    @StringRes int hint();
+    @StringRes int hint() default -1;
     boolean isSingleLine() default false;
 }

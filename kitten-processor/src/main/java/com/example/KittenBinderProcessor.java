@@ -1,8 +1,6 @@
 package com.example;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
@@ -17,15 +15,12 @@ import kittenbinder.BindImageView;
 import kittenbinder.BindLinearLayout;
 import kittenbinder.BindPadding;
 import kittenbinder.BindStyle;
-import kittenbinder.BindTest;
 import kittenbinder.BindTextAppearance;
 import kittenbinder.BindTextView;
 import kittenbinder.BindVisibility;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.util.Collection;
-import java.util.Dictionary;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -40,11 +35,9 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.ElementFilter;
 
 import static com.google.auto.common.MoreElements.getPackage;
 
@@ -54,6 +47,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
     static final String VIEW_TYPE = "android.view.View";
     static final String IMAGE_VIEW_TYPE = "android.widget.ImageView";
     static final String TEXT_VIEW_TYPE = "android.widget.TextView";
+    static final String Linear_LAYOUT_TYPE = "android.widget.LinearLayout";
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -149,6 +143,12 @@ public class KittenBinderProcessor extends AbstractProcessor{
                     bindContext(methodBuilder, subEntry);
                 }
             }
+            if(entry.getKey() == BindTextAppearance.class){
+                for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()){
+                    //subEntry.getValue() would be used when parameter exist
+                    bindTextAppearance(methodBuilder, subEntry);
+                }
+            }
             if(entry.getKey() == BindVisibility.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()){
                     //subEntry.getValue() would be used when parameter exist
@@ -175,14 +175,45 @@ public class KittenBinderProcessor extends AbstractProcessor{
                     bindTextView(methodBuilder, subEntry);
                 }
             }
+            if(entry.getKey() == BindEditText.class){
+                for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
+                    bindEditText(methodBuilder, subEntry);
+                }
+            }
+            if(entry.getKey() == BindLinearLayout.class){
+                for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
+                    bindLinearLayout(methodBuilder, subEntry);
+                }
+            }
 
         }
         result.addMethod(methodBuilder.build());
 
         return result.build();
     }
-    private void bindEditText(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
 
+    private void bindLinearLayout(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
+        if (isSubtypeOfType(subEntry.getKey().asType(), Linear_LAYOUT_TYPE)){
+            BindLinearLayout bind = (BindLinearLayout) subEntry.getValue();
+            methodBuilder.addStatement("target.$L.setOrientation($L)", subEntry.getKey().getSimpleName(), bind.value());
+        }
+    }
+    private void bindTextAppearance(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
+        if (isSubtypeOfType(subEntry.getKey().asType(), TEXT_VIEW_TYPE)) {
+            BindTextAppearance bind = (BindTextAppearance) subEntry.getValue();
+            if(bind.value() != -1){
+                methodBuilder.addStatement("target.$L.setTextAppearance(context, $L)", subEntry.getKey().getSimpleName(), bind.value());
+            }
+        }
+    }
+    private void bindEditText(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
+        if (isSubtypeOfType(subEntry.getKey().asType(), TEXT_VIEW_TYPE)) {
+            BindEditText bind = (BindEditText) subEntry.getValue();
+            if(bind.hint() != -1){
+                methodBuilder.addStatement("target.$L.setHint($L)", subEntry.getKey().getSimpleName(), bind.hint());
+            }
+            methodBuilder.addStatement("target.$L.setSingleLine($L)", subEntry.getKey().getSimpleName(), bind.isSingleLine());
+        }
     }
     private void bindTextView(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
         if(isSubtypeOfType(subEntry.getKey().asType(), TEXT_VIEW_TYPE)){
