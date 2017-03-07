@@ -19,6 +19,7 @@ import kittenbinder.BindEditText;
 import kittenbinder.BindImageView;
 import kittenbinder.BindLinearLayout;
 import kittenbinder.BindPadding;
+import kittenbinder.BindStyle;
 import kittenbinder.BindTextAppearance;
 import kittenbinder.BindTextView;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
 
     @BindContext
+    @BindStyle(R.style.sample_text_style)
     @BindBackground(android.R.color.holo_green_light)
     @BindTextView(value = R.string.sample1, textSize = R.dimen.text_sample_size, gravity = Gravity.CENTER_HORIZONTAL)
     TextView textView2;

@@ -14,5 +14,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
 public @interface BindStyle {
-    @StyleRes int value();
+    @StyleRes int value() default -1;
 }

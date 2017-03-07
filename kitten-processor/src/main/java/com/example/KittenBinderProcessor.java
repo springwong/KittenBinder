@@ -1,6 +1,7 @@
 package com.example;
 
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
@@ -94,7 +95,9 @@ public class KittenBinderProcessor extends AbstractProcessor{
         if(actions.size() == 0){
             return false;
         }
-        JavaFile javaFile = JavaFile.builder(bindingClassName.packageName(), createType(0, bindingClassName, actions)).build();
+        JavaFile javaFile = JavaFile.builder(bindingClassName.packageName(), createType(0, bindingClassName, actions))
+                .addStaticImport(ClassName.get("com.spring.kittenbinder.binding", "KittenBind"), "setStyle")
+                .build();
         try {
             javaFile.writeTo(filer);
         } catch (IOException e) {
@@ -141,6 +144,12 @@ public class KittenBinderProcessor extends AbstractProcessor{
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()){
                     //subEntry.getValue() would be used when parameter exist
                     bindContext(methodBuilder, subEntry);
+                }
+            }
+            if(entry.getKey() == BindStyle.class){
+                for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()){
+                    //subEntry.getValue() would be used when parameter exist
+                    bindStyle(methodBuilder, subEntry);
                 }
             }
             if(entry.getKey() == BindTextAppearance.class){
@@ -192,6 +201,12 @@ public class KittenBinderProcessor extends AbstractProcessor{
         return result.build();
     }
 
+    private void bindStyle(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
+        BindStyle bind = (BindStyle) subEntry.getValue();
+        if(bind.value() != -1){
+            methodBuilder.addStatement("setStyle(target.$L, $L, context)", subEntry.getKey().getSimpleName(), bind.value());
+        }
+    }
     private void bindLinearLayout(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
         if (isSubtypeOfType(subEntry.getKey().asType(), Linear_LAYOUT_TYPE)){
             BindLinearLayout bind = (BindLinearLayout) subEntry.getValue();

@@ -16,16 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.spring.kittenbinder.R;
-import kittenbinder.BindBackground;
-import kittenbinder.BindContext;
-import kittenbinder.BindEditText;
-import kittenbinder.BindImageView;
-import kittenbinder.BindLinearLayout;
-import kittenbinder.BindPadding;
 import kittenbinder.BindStyle;
 import kittenbinder.BindTextAppearance;
-import kittenbinder.BindTextView;
-import kittenbinder.BindVisibility;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -55,19 +47,6 @@ public class KittenBind {
 
     public static void bind(Object target, Context context) {
         createBinding(target, context);
-//        Field[] fields = object.getClass().getDeclaredFields();
-//        for (Field field : fields) {
-//            View view = bindContext(object, field, context);;
-//            bindStyle(view, field, context);
-//            bindPadding(view, field, context);
-//            bindVisibility(view, field, context);
-//            bindBackground(view ,field, context);
-//            bindImageView(view, field, context);
-//            bindTextAppearance(view, field, context);
-//            bindTextView(view, field, context);
-//            bindEditText(view, field, context);
-//            bindLinearLayout(view, field, context);
-//        }
     }
 
     @SuppressWarnings("deprecation")
@@ -89,13 +68,6 @@ public class KittenBind {
     @TargetApi(Build.VERSION_CODES.M)
     public static void setTextAppearance(TextView textView, int resId){
         textView.setTextAppearance(resId);
-    }
-
-    public static void bindStyle(View view, Field field, Context context){
-        BindStyle style = field.getAnnotation(BindStyle.class);
-        if(style!=null){
-            setStyle(view, style.value(), context);
-        }
     }
 
     //todo : long way to fill all fields assignment
