@@ -1,6 +1,8 @@
 package com.example;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
@@ -50,6 +52,9 @@ import static com.google.auto.common.MoreElements.getPackage;
 public class KittenBinderProcessor extends AbstractProcessor{
     private Filer filer;
     static final String VIEW_TYPE = "android.view.View";
+    static final String IMAGE_VIEW_TYPE = "android.widget.ImageView";
+    static final String TEXT_VIEW_TYPE = "android.widget.TextView";
+
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
@@ -155,13 +160,74 @@ public class KittenBinderProcessor extends AbstractProcessor{
                     bindPadding(methodBuilder, subEntry);
                 }
             }
+            if(entry.getKey() == BindBackground.class){
+                for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
+                    bindBackground(methodBuilder, subEntry);
+                }
+            }
+            if(entry.getKey() == BindImageView.class){
+                for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
+                    bindImageView(methodBuilder, subEntry);
+                }
+            }
+            if(entry.getKey() == BindTextView.class){
+                for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
+                    bindTextView(methodBuilder, subEntry);
+                }
+            }
+
         }
         result.addMethod(methodBuilder.build());
 
         return result.build();
     }
+    private void bindEditText(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
+
+    }
+    private void bindTextView(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
+        if(isSubtypeOfType(subEntry.getKey().asType(), TEXT_VIEW_TYPE)){
+            BindTextView bind = (BindTextView) subEntry.getValue();
+            if(bind.value() != -1){
+                methodBuilder.addStatement("target.$L.setText($L)", subEntry.getKey().getSimpleName(), bind.value());
+            }
+            if(bind.textSize() != -1){
+                methodBuilder.addStatement("target.$L.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension($L))", subEntry.getKey().getSimpleName(), bind.textSize());
+            }
+            if(bind.textColor() != -1){
+                methodBuilder.addStatement("target.$L.setTextColor(context.getResources().getColor($L, context.getTheme()))", subEntry.getKey().getSimpleName(), bind.textColor());
+            }
+            if(bind.lines()!=-1){
+                methodBuilder.addStatement("target.$L.setLines($L)", subEntry.getKey().getSimpleName(), bind.lines());
+            }
+            if(bind.minLines()!=-1){
+                methodBuilder.addStatement("target.$L.setMinLines($L)", subEntry.getKey().getSimpleName(), bind.minLines());
+            }
+            if(bind.maxLines()!=-1){
+                methodBuilder.addStatement("target.$L.setMaxLines($L)", subEntry.getKey().getSimpleName(), bind.maxLines());
+            }
+            if(bind.gravity() != -1){
+                methodBuilder.addStatement("target.$L.setGravity($L)", subEntry.getKey().getSimpleName(), bind.gravity());
+            }
+        }
+    }
+    private void bindImageView(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
+        if(isSubtypeOfType(subEntry.getKey().asType(), IMAGE_VIEW_TYPE)){
+            BindImageView bind = (BindImageView) subEntry.getValue();
+            if(bind.value() != -1){
+                methodBuilder.addStatement("target.$L.setImageResource($L)", subEntry.getKey().getSimpleName(), bind.value());
+            }
+            methodBuilder.addStatement("target.$L.setAdjustViewBounds($L)", subEntry.getKey().getSimpleName(), bind.adjustViewBounds());
+            methodBuilder.addStatement("target.$L.setScaleType(ImageView.ScaleType.$L)", subEntry.getKey().getSimpleName(), bind.scaleType());
+        }
+    }
+    private void bindBackground(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry){
+        BindBackground bind = (BindBackground) subEntry.getValue();
+        if(bind.value() != -1){
+            methodBuilder.addStatement("target.$L.setBackgroundResource($L)", subEntry.getKey().getSimpleName(), bind.value());
+        }
+    }
     private void bindContext(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry){
-        methodBuilder.addCode("target.$L = new $T(context);\n", subEntry.getKey().getSimpleName(), subEntry.getKey().asType());
+        methodBuilder.addStatement("target.$L = new $T(context)", subEntry.getKey().getSimpleName(), subEntry.getKey().asType());
     }
     private void bindVisibility(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry){
         BindVisibility bind = (BindVisibility) subEntry.getValue();

@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface BindBackground {
-    @ColorRes @DrawableRes int value();
+    @ColorRes @DrawableRes int value() default -1;
 }
