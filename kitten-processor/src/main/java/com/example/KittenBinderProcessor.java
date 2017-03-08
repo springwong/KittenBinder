@@ -1,8 +1,5 @@
 package com.example;
 
-import android.view.View;
-import android.widget.LinearLayout;
-
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -278,13 +275,13 @@ public class KittenBinderProcessor extends AbstractProcessor{
     private void bindVisibility(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry){
         BindVisibility bind = (BindVisibility) subEntry.getValue();
         switch (bind.value()){
-            case View.VISIBLE:
+            case 0:
                 methodBuilder.addStatement("target.$L.setVisibility($L)", subEntry.getKey().getSimpleName(), "android.view.View.VISIBLE");
                 break;
-            case View.INVISIBLE:
+            case 4:
                 methodBuilder.addStatement("target.$L.setVisibility($L)", subEntry.getKey().getSimpleName(), "android.view.View.INVISIBLE");
                 break;
-            case View.GONE:
+            case 8:
                 methodBuilder.addStatement("target.$L.setVisibility($L)", subEntry.getKey().getSimpleName(), "android.view.View.GONE");
                 break;
         }

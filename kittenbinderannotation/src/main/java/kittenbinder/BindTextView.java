@@ -6,8 +6,6 @@ import android.support.annotation.Dimension;
 import android.support.annotation.IntDef;
 import android.support.annotation.Size;
 import android.support.annotation.StringRes;
-import android.view.Gravity;
-import android.view.View;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

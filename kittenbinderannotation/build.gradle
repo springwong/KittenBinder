@@ -8,8 +8,8 @@ for (File file : sdkHandler.sdkLoader.repositories) {
     }
 }
 
-targetCompatibility = '1.7'
-sourceCompatibility = '1.7'
+targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
