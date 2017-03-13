@@ -12,7 +12,7 @@ import kittenbinder.DecoEditText;
 import kittenbinder.DecoImageView;
 import kittenbinder.DecoLinearLayout;
 import kittenbinder.DecoPadding;
-import kittenbinder.BindStyle;
+import kittenbinder.DecoStyle;
 import kittenbinder.DecoTextAppearance;
 import kittenbinder.DecoTextView;
 import kittenbinder.DecoVisibility;
@@ -56,7 +56,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
     private Set<Class<? extends Annotation>> getSupportedAnnotations(){
         Set<Class<? extends Annotation>> annotations = new LinkedHashSet<>();
         annotations.add(BindContext.class);
-        annotations.add(BindStyle.class);
+        annotations.add(DecoStyle.class);
         annotations.add(DecoTextAppearance.class);
         annotations.add(DecoPadding.class);
         annotations.add(DecoBackground.class);
@@ -143,10 +143,10 @@ public class KittenBinderProcessor extends AbstractProcessor{
                     bindContext(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindStyle.class){
+            if(entry.getKey() == DecoStyle.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()){
                     //subEntry.getValue() would be used when parameter exist
-                    bindStyle(methodBuilder, subEntry);
+                    DecoStyle(methodBuilder, subEntry);
                 }
             }
             if(entry.getKey() == DecoTextAppearance.class){
@@ -198,8 +198,8 @@ public class KittenBinderProcessor extends AbstractProcessor{
         return result.build();
     }
 
-    private void bindStyle(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
-        BindStyle bind = (BindStyle) subEntry.getValue();
+    private void DecoStyle(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
+        DecoStyle bind = (DecoStyle) subEntry.getValue();
         if(bind.value() != -1){
             methodBuilder.addStatement("setStyle(target.$L, $L, context)", subEntry.getKey().getSimpleName(), bind.value());
         }

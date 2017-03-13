@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spring.kittenbinder.R;
-import kittenbinder.BindStyle;
+import kittenbinder.DecoStyle;
 import kittenbinder.DecoTextAppearance;
 
 import java.lang.reflect.Field;

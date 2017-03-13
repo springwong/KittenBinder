@@ -22,7 +22,7 @@ import kittenbinder.DecoEditText;
 import kittenbinder.DecoImageView;
 import kittenbinder.DecoLinearLayout;
 import kittenbinder.DecoPadding;
-import kittenbinder.BindStyle;
+import kittenbinder.DecoStyle;
 import kittenbinder.DecoTextAppearance;
 import kittenbinder.DecoTextView;
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
 
     @BindContext
-    @BindStyle(R.style.sample_text_style)
+    @DecoStyle(R.style.sample_text_style)
     @DecoBackground(android.R.color.holo_green_light)
     @DecoTextView(value = R.string.sample1, textSize = R.dimen.text_sample_size, gravity = Gravity.CENTER_HORIZONTAL)
     TextView textView2;
