@@ -6,16 +6,16 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 
-import kittenbinder.BindBackground;
+import kittenbinder.DecoBackground;
 import kittenbinder.BindContext;
-import kittenbinder.BindEditText;
-import kittenbinder.BindImageView;
-import kittenbinder.BindLinearLayout;
-import kittenbinder.BindPadding;
+import kittenbinder.DecoEditText;
+import kittenbinder.DecoImageView;
+import kittenbinder.DecoLinearLayout;
+import kittenbinder.DecoPadding;
 import kittenbinder.BindStyle;
-import kittenbinder.BindTextAppearance;
-import kittenbinder.BindTextView;
-import kittenbinder.BindVisibility;
+import kittenbinder.DecoTextAppearance;
+import kittenbinder.DecoTextView;
+import kittenbinder.DecoVisibility;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -57,14 +57,14 @@ public class KittenBinderProcessor extends AbstractProcessor{
         Set<Class<? extends Annotation>> annotations = new LinkedHashSet<>();
         annotations.add(BindContext.class);
         annotations.add(BindStyle.class);
-        annotations.add(BindTextAppearance.class);
-        annotations.add(BindPadding.class);
-        annotations.add(BindBackground.class);
-        annotations.add(BindVisibility.class);
-        annotations.add(BindTextView.class);
-        annotations.add(BindEditText.class);
-        annotations.add(BindImageView.class);
-        annotations.add(BindLinearLayout.class);
+        annotations.add(DecoTextAppearance.class);
+        annotations.add(DecoPadding.class);
+        annotations.add(DecoBackground.class);
+        annotations.add(DecoVisibility.class);
+        annotations.add(DecoTextView.class);
+        annotations.add(DecoEditText.class);
+        annotations.add(DecoImageView.class);
+        annotations.add(DecoLinearLayout.class);
         return annotations;
     }
 
@@ -149,44 +149,44 @@ public class KittenBinderProcessor extends AbstractProcessor{
                     bindStyle(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindTextAppearance.class){
+            if(entry.getKey() == DecoTextAppearance.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()){
                     //subEntry.getValue() would be used when parameter exist
                     bindTextAppearance(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindVisibility.class){
+            if(entry.getKey() == DecoVisibility.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()){
                     //subEntry.getValue() would be used when parameter exist
                     bindVisibility(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindPadding.class){
+            if(entry.getKey() == DecoPadding.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
                     bindPadding(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindBackground.class){
+            if(entry.getKey() == DecoBackground.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
                     bindBackground(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindImageView.class){
+            if(entry.getKey() == DecoImageView.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
                     bindImageView(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindTextView.class){
+            if(entry.getKey() == DecoTextView.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
                     bindTextView(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindEditText.class){
+            if(entry.getKey() == DecoEditText.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
                     bindEditText(methodBuilder, subEntry);
                 }
             }
-            if(entry.getKey() == BindLinearLayout.class){
+            if(entry.getKey() == DecoLinearLayout.class){
                 for(Map.Entry<Element, Object> subEntry : entry.getValue().entrySet()) {
                     bindLinearLayout(methodBuilder, subEntry);
                 }
@@ -206,13 +206,13 @@ public class KittenBinderProcessor extends AbstractProcessor{
     }
     private void bindLinearLayout(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
         if (isSubtypeOfType(subEntry.getKey().asType(), Linear_LAYOUT_TYPE)){
-            BindLinearLayout bind = (BindLinearLayout) subEntry.getValue();
+            DecoLinearLayout bind = (DecoLinearLayout) subEntry.getValue();
             methodBuilder.addStatement("target.$L.setOrientation($L)", subEntry.getKey().getSimpleName(), bind.value());
         }
     }
     private void bindTextAppearance(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
         if (isSubtypeOfType(subEntry.getKey().asType(), TEXT_VIEW_TYPE)) {
-            BindTextAppearance bind = (BindTextAppearance) subEntry.getValue();
+            DecoTextAppearance bind = (DecoTextAppearance) subEntry.getValue();
             if(bind.value() != -1){
                 methodBuilder.addStatement("target.$L.setTextAppearance(context, $L)", subEntry.getKey().getSimpleName(), bind.value());
             }
@@ -220,7 +220,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
     }
     private void bindEditText(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
         if (isSubtypeOfType(subEntry.getKey().asType(), TEXT_VIEW_TYPE)) {
-            BindEditText bind = (BindEditText) subEntry.getValue();
+            DecoEditText bind = (DecoEditText) subEntry.getValue();
             if(bind.hint() != -1){
                 methodBuilder.addStatement("target.$L.setHint($L)", subEntry.getKey().getSimpleName(), bind.hint());
             }
@@ -229,7 +229,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
     }
     private void bindTextView(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
         if(isSubtypeOfType(subEntry.getKey().asType(), TEXT_VIEW_TYPE)){
-            BindTextView bind = (BindTextView) subEntry.getValue();
+            DecoTextView bind = (DecoTextView) subEntry.getValue();
             if(bind.value() != -1){
                 methodBuilder.addStatement("target.$L.setText($L)", subEntry.getKey().getSimpleName(), bind.value());
             }
@@ -255,7 +255,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
     }
     private void bindImageView(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry) {
         if(isSubtypeOfType(subEntry.getKey().asType(), IMAGE_VIEW_TYPE)){
-            BindImageView bind = (BindImageView) subEntry.getValue();
+            DecoImageView bind = (DecoImageView) subEntry.getValue();
             if(bind.value() != -1){
                 methodBuilder.addStatement("target.$L.setImageResource($L)", subEntry.getKey().getSimpleName(), bind.value());
             }
@@ -264,7 +264,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
         }
     }
     private void bindBackground(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry){
-        BindBackground bind = (BindBackground) subEntry.getValue();
+        DecoBackground bind = (DecoBackground) subEntry.getValue();
         if(bind.value() != -1){
             methodBuilder.addStatement("target.$L.setBackgroundResource($L)", subEntry.getKey().getSimpleName(), bind.value());
         }
@@ -273,7 +273,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
         methodBuilder.addStatement("target.$L = new $T(context)", subEntry.getKey().getSimpleName(), subEntry.getKey().asType());
     }
     private void bindVisibility(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry){
-        BindVisibility bind = (BindVisibility) subEntry.getValue();
+        DecoVisibility bind = (DecoVisibility) subEntry.getValue();
         switch (bind.value()){
             case 0:
                 methodBuilder.addStatement("target.$L.setVisibility($L)", subEntry.getKey().getSimpleName(), "android.view.View.VISIBLE");
@@ -287,7 +287,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
         }
     }
     private void bindPadding(MethodSpec.Builder methodBuilder, Map.Entry<Element, Object> subEntry){
-        BindPadding bind = (BindPadding) subEntry.getValue();
+        DecoPadding bind = (DecoPadding) subEntry.getValue();
         if(bind.value() != Integer.MIN_VALUE
                 || bind.left() != Integer.MIN_VALUE
                 || bind.top() != Integer.MIN_VALUE

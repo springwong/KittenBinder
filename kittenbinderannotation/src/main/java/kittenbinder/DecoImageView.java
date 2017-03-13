@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
-public @interface BindImageView {
+public @interface DecoImageView {
     @DrawableRes int value() default -1;
     boolean adjustViewBounds() default false;
     ImageView.ScaleType scaleType() default ImageView.ScaleType.FIT_CENTER;

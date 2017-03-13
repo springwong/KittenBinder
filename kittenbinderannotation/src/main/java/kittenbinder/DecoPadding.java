@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
-public @interface BindPadding {
+public @interface DecoPadding {
     int value() default Integer.MIN_VALUE;
     int left() default Integer.MIN_VALUE;
     int top() default Integer.MIN_VALUE;

@@ -1,18 +1,19 @@
 package kittenbinder;
 
-/**
- * Created by spring on 5/3/2017.
- */
-
-import android.support.annotation.IntDef;
-import android.view.View;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+/**
+ * Created by spring on 5/3/2017.
+ */
+
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
-public @interface BindVisibility {
-    int value() default View.VISIBLE;
+public @interface DecoBackground {
+    @ColorRes @DrawableRes int value() default -1;
 }

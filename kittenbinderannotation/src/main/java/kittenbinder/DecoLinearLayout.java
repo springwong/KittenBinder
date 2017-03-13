@@ -1,7 +1,7 @@
 package kittenbinder;
 
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
+import android.support.annotation.IntDef;
+import android.widget.LinearLayout;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,6 +14,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
-public @interface BindBackground {
-    @ColorRes @DrawableRes int value() default -1;
+public @interface DecoLinearLayout {
+    int value() default LinearLayout.VERTICAL;
 }

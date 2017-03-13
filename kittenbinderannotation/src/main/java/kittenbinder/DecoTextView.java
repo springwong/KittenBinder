@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
-public @interface BindTextView {
+public @interface DecoTextView {
     @StringRes int value();
     @DimenRes int textSize() default -1;
     @ColorRes int textColor() default -1;

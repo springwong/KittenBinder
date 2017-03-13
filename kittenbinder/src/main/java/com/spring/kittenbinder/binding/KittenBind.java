@@ -7,19 +7,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.spring.kittenbinder.R;
 import kittenbinder.BindStyle;
-import kittenbinder.BindTextAppearance;
+import kittenbinder.DecoTextAppearance;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -52,7 +47,7 @@ public class KittenBind {
     @SuppressWarnings("deprecation")
     public static void bindTextAppearance(View view, Field field, Context context){
         if(view instanceof TextView){
-            BindTextAppearance bind = field.getAnnotation(BindTextAppearance.class);
+            DecoTextAppearance bind = field.getAnnotation(DecoTextAppearance.class);
             if(bind!=null){
                 TextView textView = (TextView) view;
                 int sdk = android.os.Build.VERSION.SDK_INT;
