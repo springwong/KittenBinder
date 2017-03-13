@@ -28,7 +28,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
-    androidTestCompile project(':kitten-processor')
+    compile project(':kitten-processor')
     compile project(':kittenbinderannotation')
     compile 'com.android.support:support-annotations:25.2.0'
 }
