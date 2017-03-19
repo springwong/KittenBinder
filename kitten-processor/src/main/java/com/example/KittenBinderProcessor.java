@@ -19,6 +19,7 @@ import kittenbinder.DecoVisibility;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -88,37 +89,59 @@ public class KittenBinderProcessor extends AbstractProcessor{
     ClassName bindingClassName = null;
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment env) {
-        Map<Class<? extends Annotation>, Map<Element, Object>> actions = generateActionMap(env);
+        Map<TypeElement,  Map<Class<? extends Annotation>, Map<Element, Object>>> actions = generateActionMap(env);
         if(actions.size() == 0){
             return false;
         }
-        JavaFile javaFile = JavaFile.builder(bindingClassName.packageName(), createType(0, bindingClassName, actions))
-                .addStaticImport(ClassName.get("com.spring.kittenbinder.binding", "KittenBind"), "setStyle")
-                .build();
-        try {
-            javaFile.writeTo(filer);
-        } catch (IOException e) {
+        for (Map.Entry<TypeElement, Map<Class<? extends Annotation>, Map<Element, Object>>> entry : actions.entrySet()) {
+            ClassName className = createClassName(entry.getKey());
+            if(className != null) {
+                JavaFile javaFile = JavaFile.builder(className.packageName(), createType(0, className, entry.getValue()))
+                        .addStaticImport(ClassName.get("com.spring.kittenbinder.binding", "KittenBind"), "setStyle")
+                        .build();
+                try {
+                    javaFile.writeTo(filer);
+                } catch (IOException e) {
 //            error(typeElement, "Unable to write binding for type %s: %s", typeElement, e.getMessage());
+                }
+            }
         }
         return false;
     }
-    private Map<Class<? extends Annotation>, Map<Element, Object>> generateActionMap(RoundEnvironment env){
-        Map<Class<? extends Annotation>, Map<Element, Object>> builderMap = new LinkedHashMap<>();
+    private Map<TypeElement,  Map<Class<? extends Annotation>, Map<Element, Object>>> generateActionMap(RoundEnvironment env){
+        Map<TypeElement,  Map<Class<? extends Annotation>, Map<Element, Object>>> map = new LinkedHashMap<>();
 
         for (Class<? extends  Annotation> classZ : getSupportedAnnotations()){
-            Map<Element, Object> annotationMap = new LinkedHashMap<>();
             for(Element element : env.getElementsAnnotatedWith(classZ)){
                 if(isSubtypeOfType(element.asType(), VIEW_TYPE)){
-                    createBindingClassName(element);
+                    Map<Class<? extends Annotation>, Map<Element, Object>> tempMap = null;
+                    if(!map.containsKey(element.getEnclosingElement())){
+                        tempMap = new LinkedHashMap<Class<? extends Annotation>, Map<Element, Object>>();
+                        map.put((TypeElement)element.getEnclosingElement(), tempMap);
+                    }else{
+                        tempMap = map.get(element.getEnclosingElement());
+                    }
+                    Map<Element, Object> annotationMap = null;
+                    if(!tempMap.containsKey(classZ)){
+                        annotationMap = new LinkedHashMap<>();
+                        tempMap.put(classZ, annotationMap);
+                    }else{
+                        annotationMap = tempMap.get(classZ);
+                    }
                     annotationMap.put(element, element.getAnnotation(classZ));
                 }else{
                     //todo : some warning
                 }
             }
-            builderMap.put(classZ, annotationMap);
         }
 
-        return builderMap;
+        return map;
+    }
+    private ClassName createClassName(TypeElement element){
+        String packageName = getPackage((Element)element).getQualifiedName().toString();
+        String className = element.getQualifiedName().toString().substring(
+                packageName.length() + 1).replace('.', '$');
+        return ClassName.get(packageName, className);
     }
     private void createBindingClassName(Element element){
         if(bindingClassName == null){

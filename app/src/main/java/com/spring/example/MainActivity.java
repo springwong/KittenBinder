@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn)
     TextView benchMarkButton;
 
+    @BindContext
+    CustomView customView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainView.setOrientation(LinearLayout.VERTICAL);
 
+        mainView.addView(customView);
         mainView.addView(getConstraintLayout());
         mainView.addView(textView);
         mainView.addView(textView2);
@@ -111,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
         mainView.addView(textViewD);
 
         mainView.addView(btn);
+
+        customView.textView.setText("custom view");
 
         textView.setText("Testing text");
         mainView.addView(benchmark);

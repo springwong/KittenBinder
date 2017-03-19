@@ -1,4 +1,6 @@
 apply plugin: 'java'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 def logger = new com.android.build.gradle.internal.LoggerWrapper(project.logger)
 def sdkHandler = new com.android.build.gradle.internal.SdkHandler(project, logger)
@@ -19,4 +21,36 @@ dependencies {
     compile 'com.google.auto.service:auto-service:1.0-rc2'
     compile 'com.squareup:javapoet:1.8.0'
     compile 'com.google.android:android:4.1.1.4'
+}
+
+group "com.spring.kitten"
+version "0.1.4"
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            group "com.spring.kitten"
+            artifactId "kitten-processor"
+            version "0.1.4"
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    // jFrog plugin must be declared for this line to work
+    configurations = ['archives']
+    // Package info for BinTray
+    pkg {
+        repo = 'maven'
+        name = 'kitten-processor'
+        userOrg = user
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/springwong/Kitten.git'
+        version {
+            name = '0.1.4'
+            desc = 'Kitten Binder 0.1.4'
+            vcsTag = '0.1.4'
+        }
+    }
 }
