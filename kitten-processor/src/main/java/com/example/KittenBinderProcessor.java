@@ -109,33 +109,33 @@ public class KittenBinderProcessor extends AbstractProcessor{
         return false;
     }
     private Map<TypeElement,  Map<Class<? extends Annotation>, Map<Element, Object>>> generateActionMap(RoundEnvironment env){
-        Map<TypeElement,  Map<Class<? extends Annotation>, Map<Element, Object>>> map = new LinkedHashMap<>();
+        Map<TypeElement,  Map<Class<? extends Annotation>, Map<Element, Object>>> typeAnnotationMap = new LinkedHashMap<>();
 
         for (Class<? extends  Annotation> classZ : getSupportedAnnotations()){
             for(Element element : env.getElementsAnnotatedWith(classZ)){
                 if(isSubtypeOfType(element.asType(), VIEW_TYPE)){
-                    Map<Class<? extends Annotation>, Map<Element, Object>> tempMap = null;
-                    if(!map.containsKey(element.getEnclosingElement())){
-                        tempMap = new LinkedHashMap<Class<? extends Annotation>, Map<Element, Object>>();
-                        map.put((TypeElement)element.getEnclosingElement(), tempMap);
+                    Map<Class<? extends Annotation>, Map<Element, Object>> annotationElementMap = null;
+                    if(!typeAnnotationMap.containsKey(element.getEnclosingElement())){
+                        annotationElementMap = new LinkedHashMap<>();
+                        typeAnnotationMap.put((TypeElement)element.getEnclosingElement(), annotationElementMap);
                     }else{
-                        tempMap = map.get(element.getEnclosingElement());
+                        annotationElementMap = typeAnnotationMap.get(element.getEnclosingElement());
                     }
-                    Map<Element, Object> annotationMap = null;
-                    if(!tempMap.containsKey(classZ)){
-                        annotationMap = new LinkedHashMap<>();
-                        tempMap.put(classZ, annotationMap);
+                    Map<Element, Object> elementAnnotationObjectMap = null;
+                    if(!annotationElementMap.containsKey(classZ)){
+                        elementAnnotationObjectMap = new LinkedHashMap<>();
+                        annotationElementMap.put(classZ, elementAnnotationObjectMap);
                     }else{
-                        annotationMap = tempMap.get(classZ);
+                        elementAnnotationObjectMap = annotationElementMap.get(classZ);
                     }
-                    annotationMap.put(element, element.getAnnotation(classZ));
+                    elementAnnotationObjectMap.put(element, element.getAnnotation(classZ));
                 }else{
                     //todo : some warning
                 }
             }
         }
 
-        return map;
+        return typeAnnotationMap;
     }
     private ClassName createClassName(TypeElement element){
         String packageName = getPackage((Element)element).getQualifiedName().toString();
