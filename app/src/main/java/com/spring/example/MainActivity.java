@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
 
     @BindContext
-    @DecoStyle(R.style.sample_text_style)
+//    @DecoStyle(R.style.sample_text_style)
     @DecoBackground(android.R.color.holo_green_light)
     @DecoTextView(value = R.string.sample1, textSize = R.dimen.text_sample_size, gravity = Gravity.CENTER_HORIZONTAL)
     TextView textView2;
@@ -59,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
     @BindContext
     @DecoTextView(R.string.sample1)
-    @DecoTextAppearance(R.style.sample_text_style)
+//    @DecoTextAppearance(R.style.sample_text_style)
     TextView textViewC;
 
     //DecoTextView override some seting of textAppearance
     @BindContext
     @DecoTextView(value = R.string.sample1, textSize = R.dimen.text_sample_size, textColor = R.color.colorPrimaryDark)
-    @DecoTextAppearance(R.style.sample_text_style)
+//    @DecoTextAppearance(R.style.sample_text_style)
     TextView textViewD;
 
     @BindContext

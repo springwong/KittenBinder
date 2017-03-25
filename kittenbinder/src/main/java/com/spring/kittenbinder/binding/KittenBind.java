@@ -36,9 +36,9 @@ public class KittenBind {
     public static void bind(View view){
         bind(view, view.getContext());
     }
-    public static void bind(android.support.v4.app.Fragment fragment){
-        bind(fragment, fragment.getActivity());
-    }
+//    public static void bind(android.support.v4.app.Fragment fragment){
+//        bind(fragment, fragment.getActivity());
+//    }
 
     public static void bind(Object target, Context context) {
         createBinding(target, context);
