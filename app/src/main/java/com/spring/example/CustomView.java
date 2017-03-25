@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.spring.kittenbinder.binding.KittenBind;
+import kittenbinder.KittenBind;
 
 import kittenbinder.BindContext;
 

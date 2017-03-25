@@ -1,1 +1,1 @@
-include ':app', ':kittenbinder', ':kitten-processor', ':kittenbinderannotation'
+include ':app', ':kitten-binder', ':kitten-processor', ':kittenbinderannotation'

@@ -31,7 +31,7 @@ dependencies {
     compile deps.supportCompat
     compile deps.appCompact
     testCompile 'junit:junit:4.12'
-    compile project(':kittenbinder')
+    compile project(':kitten-binder')
     compile 'com.jakewharton:butterknife:8.5.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'

@@ -25,14 +25,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile deps.supportCompat
     testCompile 'junit:junit:4.12'
-//    testCompile project(':kitten-processor')
-//    compile project(':kittenbinderannotation')
-//    compile deps.supportAnnotations
 }
 
 //group kittenGroup
@@ -41,8 +34,8 @@ install {
     repositories.mavenInstaller {
         pom.project {
             group kittenGroup
-            artifactId "kittenbinder"
-//            version kittenLatestReleaseVersion
+            artifactId "kitten-binder"
+            version kittenLatestReleaseVersion
         }
     }
 }
@@ -55,7 +48,7 @@ bintray {
     // Package info for BinTray
     pkg {
         repo = 'maven'
-        name = 'kittenbinder'
+        name = 'kitten-binder'
         userOrg = user
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/springwong/KittenBinder.git'

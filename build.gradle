@@ -38,7 +38,7 @@ ext {
 
     androidToolsVersion = '25.2.0'
     supportLibraryVersion = '25.1.0'
-    kittenLatestReleaseVersion = '1.0.6'
+    kittenLatestReleaseVersion = '1.0.8'
     kittenVersionCode = 1
     kittenGroup = "com.spring.kitten"
 }

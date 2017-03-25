@@ -22,11 +22,9 @@ import kittenbinder.DecoEditText;
 import kittenbinder.DecoImageView;
 import kittenbinder.DecoLinearLayout;
 import kittenbinder.DecoPadding;
-import kittenbinder.DecoStyle;
-import kittenbinder.DecoTextAppearance;
 import kittenbinder.DecoTextView;
 
-import com.spring.kittenbinder.binding.KittenBind;
+import kittenbinder.KittenBind;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

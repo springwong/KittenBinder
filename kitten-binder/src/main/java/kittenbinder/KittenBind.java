@@ -1,9 +1,8 @@
-package com.spring.kittenbinder.binding;
+package kittenbinder;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +11,6 @@ import com.spring.kittenbinder.R;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import static com.spring.kittenbinder.binding.KittenImageViewStyling.setSrc;
-import static com.spring.kittenbinder.binding.KittenTextViewStyling.setGravity;
 
 /**
  * Created by spring on 28/2/2017.
@@ -66,15 +62,15 @@ public class KittenBind {
         KittenViewStyling.setVisibility(view, ta);
         KittenViewStyling.setPadding(view, ta);
         if (view instanceof TextView){
-            setGravity((TextView)view, ta);
+            KittenTextViewStyling.setGravity((TextView)view, ta);
         }
         if (view instanceof ImageView){
-            setSrc((ImageView)view, ta);
+            KittenImageViewStyling.setSrc((ImageView)view, ta);
         }
         ta.recycle();
     }
 
-    private static void createBinding(@NonNull Object target, @NonNull Context context) {
+    private static void createBinding(Object target, Context context) {
         Class<?> targetClass = target.getClass();
         try {
             Class<?> classZ = Class.forName(target.getClass().getName() + "_ViewDecorator");

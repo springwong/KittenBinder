@@ -1,4 +1,4 @@
-package com.spring.kittenbinder.binding;
+package kittenbinder;
 
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
