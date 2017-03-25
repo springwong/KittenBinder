@@ -1,21 +1,15 @@
 package com.spring.kittenbinder.binding;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spring.kittenbinder.R;
-import kittenbinder.DecoStyle;
-import kittenbinder.DecoTextAppearance;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -30,9 +24,9 @@ public class KittenBind {
     public static void bind(Activity activity){
         bind(activity, activity.getApplicationContext());
     }
-    public static void bind(Fragment fragment){
-        bind(fragment, fragment.getActivity());
-    }
+//    public static void bind(Fragment fragment){
+//        bind(fragment, fragment.getActivity());
+//    }
     public static void bind(View view){
         bind(view, view.getContext());
     }
@@ -44,26 +38,26 @@ public class KittenBind {
         createBinding(target, context);
     }
 
-    @SuppressWarnings("deprecation")
-    public static void bindTextAppearance(View view, Field field, Context context){
-        if(view instanceof TextView){
-            DecoTextAppearance bind = field.getAnnotation(DecoTextAppearance.class);
-            if(bind!=null){
-                TextView textView = (TextView) view;
-                int sdk = android.os.Build.VERSION.SDK_INT;
-                if(sdk < android.os.Build.VERSION_CODES.M) {
-                    setTextAppearance(textView, bind.value());
-                } else {
-                    textView.setTextAppearance(context, bind.value());
-                }
-            }
-
-        }
-    }
-    @TargetApi(Build.VERSION_CODES.M)
-    public static void setTextAppearance(TextView textView, int resId){
-        textView.setTextAppearance(resId);
-    }
+//    @SuppressWarnings("deprecation")
+//    public static void bindTextAppearance(View view, Field field, Context context){
+//        if(view instanceof TextView){
+//            DecoTextAppearance bind = field.getAnnotation(DecoTextAppearance.class);
+//            if(bind!=null){
+//                TextView textView = (TextView) view;
+//                int sdk = android.os.Build.VERSION.SDK_INT;
+//                if(sdk < android.os.Build.VERSION_CODES.M) {
+//                    setTextAppearance(textView, bind.value());
+//                } else {
+//                    textView.setTextAppearance(context, bind.value());
+//                }
+//            }
+//
+//        }
+//    }
+//    @TargetApi(Build.VERSION_CODES.M)
+//    public static void setTextAppearance(TextView textView, int resId){
+//        textView.setTextAppearance(resId);
+//    }
 
     //todo : long way to fill all fields assignment
     public static void setStyle(View view, int styleResId, Context context) {

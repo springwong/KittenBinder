@@ -36,4 +36,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     annotationProcessor project(':kitten-processor')
+    compile project(':kittenbinderannotation')
 }

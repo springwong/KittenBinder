@@ -30,9 +30,9 @@ dependencies {
     })
     compile deps.supportCompat
     testCompile 'junit:junit:4.12'
-    testCompile project(':kitten-processor')
-    compile project(':kittenbinderannotation')
-    compile deps.supportAnnotations
+//    testCompile project(':kitten-processor')
+//    compile project(':kittenbinderannotation')
+//    compile deps.supportAnnotations
 }
 
 group kittenGroup
