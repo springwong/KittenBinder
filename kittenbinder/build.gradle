@@ -35,14 +35,14 @@ dependencies {
 //    compile deps.supportAnnotations
 }
 
-group kittenGroup
+//group kittenGroup
 version kittenLatestReleaseVersion
 install {
     repositories.mavenInstaller {
         pom.project {
             group kittenGroup
             artifactId "kittenbinder"
-            version kittenLatestReleaseVersion
+//            version kittenLatestReleaseVersion
         }
     }
 }
@@ -55,7 +55,7 @@ bintray {
     // Package info for BinTray
     pkg {
         repo = 'maven'
-        name = 'kitten-binder'
+        name = 'kittenbinder'
         userOrg = user
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/springwong/KittenBinder.git'
