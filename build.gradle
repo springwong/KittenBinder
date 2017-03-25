@@ -29,7 +29,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    minSdkVersion = 9
+    kittenMinSdkVersion = 15
     targetSdkVersion = 25
     compileSdkVersion = 25
     buildToolsVersion = '25.0.2'
@@ -37,14 +37,16 @@ ext {
     targetCompatibilityVersion = JavaVersion.VERSION_1_7
 
     androidToolsVersion = '25.2.0'
-    supportLibraryVersion = '25.1.0'
+    supportLibraryVersion = '25.2.0'
     kittenLatestReleaseVersion = '1.0.0'
+    kittenVersionCode = 1
     kittenGroup = "com.spring.kitten"
 }
 
 ext.deps = [
         // Android
         android: 'com.google.android:android:4.1.1.4',
+        appCompact: "com.android.support:appcompat-v7:$supportLibraryVersion",
         supportCompat: "com.android.support:support-compat:$supportLibraryVersion",
         supportAnnotations: "com.android.support:support-annotations:$supportLibraryVersion",
         // Square

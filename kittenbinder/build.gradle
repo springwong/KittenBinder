@@ -7,10 +7,10 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion kittenMinSdkVersion
+        targetSdkVersion targetSdkVersion
+        versionCode kittenVersionCode
+        versionName kittenLatestReleaseVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -28,7 +28,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile deps.supportCompat
+    compile deps.appCompact
     testCompile 'junit:junit:4.12'
 //    compile project(':kitten-processor')
     compile project(':kittenbinderannotation')
