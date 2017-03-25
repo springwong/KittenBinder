@@ -29,6 +29,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile deps.supportCompat
+    compile deps.appCompact
     testCompile 'junit:junit:4.12'
     compile project(':kittenbinder')
     compile 'com.jakewharton:butterknife:8.5.1'
