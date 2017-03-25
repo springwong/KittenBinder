@@ -30,7 +30,7 @@ dependencies {
     })
     compile deps.supportCompat
     testCompile 'junit:junit:4.12'
-//    compile project(':kitten-processor')
+    testCompile project(':kitten-processor')
     compile project(':kittenbinderannotation')
     compile deps.supportAnnotations
 }
