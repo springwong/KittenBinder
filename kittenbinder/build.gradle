@@ -28,21 +28,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile deps.supportCompat
     testCompile 'junit:junit:4.12'
 //    compile project(':kitten-processor')
     compile project(':kittenbinderannotation')
-    compile 'com.android.support:support-annotations:25.2.0'
+    compile deps.supportAnnotations
 }
 
-group "com.spring.kitten"
-version "0.1.6"
+group kittenGroup
+version kittenLatestReleaseVersion
 install {
     repositories.mavenInstaller {
         pom.project {
-            group "com.spring.kitten"
+            group kittenGroup
             artifactId "kittenbinder"
-            version "0.1.6"
+            version kittenLatestReleaseVersion
         }
     }
 }
@@ -58,11 +58,11 @@ bintray {
         name = 'kitten-binder'
         userOrg = user
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/springwong/Kitten.git'
+        vcsUrl = 'https://github.com/springwong/KittenBinder.git'
         version {
-            name = '0.1.4'
-            desc = 'Kitten Binder 0.1.4'
-            vcsTag = '0.1.4'
+            name = kittenLatestReleaseVersion
+            desc = "Kitten Binder $kittenLatestReleaseVersion"
+            vcsTag = kittenLatestReleaseVersion
         }
     }
 }
