@@ -6,11 +6,21 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
+import java.lang.reflect.Type;
+
 /**
  * Created by spring on 4/3/2017.
  */
 
 final class KittenViewStyling {
+    static void setViewStyle(View view , TypedArray ta){
+        setBackground(view, ta);
+        setVisibility(view, ta);
+        setPadding(view, ta);
+        setAlpha(view, ta);
+        setClickable(view, ta);
+    }
+
     @SuppressWarnings("deprecation")
     static void setBackground(View view , TypedArray ta){
         if(ta.hasValue(R.styleable.KittenView_android_background)){

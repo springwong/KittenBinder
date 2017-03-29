@@ -24,6 +24,7 @@ import kittenbinder.DecoEditText;
 import kittenbinder.DecoImageView;
 import kittenbinder.DecoLinearLayout;
 import kittenbinder.DecoPadding;
+import kittenbinder.DecoStyle;
 import kittenbinder.DecoTextView;
 
 import butterknife.BindView;
@@ -33,6 +34,8 @@ import kittenbinder.DecoVisibility;
 public class MainActivity extends AppCompatActivity {
 
     @BindContext @DecoLinearLayout
+//    @DecoBackground(android.R.color.holo_red_dark)
+    @DecoStyle(R.style.test)
     LinearLayout mainView;
 
     @BindContext

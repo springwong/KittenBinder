@@ -56,14 +56,12 @@ public class KittenBind {
     //todo : long way to fill all fields assignment
     public static void setStyle(View view, int styleResId, Context context) {
         final TypedArray ta = context.obtainStyledAttributes(styleResId, R.styleable.KittenView);
-        KittenViewStyling.setBackground(view, ta);
-        KittenViewStyling.setVisibility(view, ta);
-        KittenViewStyling.setPadding(view, ta);
+        KittenViewStyling.setViewStyle(view, ta);
         if (view instanceof TextView){
-            KittenTextViewStyling.setGravity((TextView)view, ta);
+            KittenTextViewStyling.setTextViewStyle((TextView)view, ta);
         }
         if (view instanceof ImageView){
-            KittenImageViewStyling.setSrc((ImageView)view, ta);
+            KittenImageViewStyling.setImageViewStyle((ImageView)view, ta);
         }
         ta.recycle();
     }
