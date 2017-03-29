@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="KittenView">
+        <!-- View attribute -->
+        <!-- padding : dimension-->
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingTop" />
+        <attr name="android:paddingRight" />
+        <attr name="android:paddingBottom" />
+        <attr name="android:padding" />
+        <!-- alpha : float-->
+        <attr name="android:alpha" />
+        <!-- background : drawable | color -->
+        <attr name="android:background" />
+        <!-- visibility : int 0,1,2 -->
+        <attr name="android:visibility" />
+        <!-- clickable : bool | reference -->
+        <attr name="android:clickable" />
+        <!-- End of View attribute -->
+
+        <!-- ImageView Attribute -->
+        <!-- src : drawable -->
+        <attr name="android:src" />
+        <!-- adjuctViewBounds : bool -->
+        <attr name="android:adjustViewBounds" />
+        <attr name="android:scaleType" />
+        <attr name="android:cropToPadding" />
+        <!-- End of ImageView Attribute -->
+
+        <!-- TextView Attribute -->
+        <attr name="android:text" />
+        <attr name="android:textSize" />
+        <!-- lineSpacingExtra : dimension -->
+        <attr name="android:lineSpacingExtra" />
+        <!-- lineSpacingMultiplier : float -->
+        <attr name="android:lineSpacingMultiplier" />
+        <attr name="android:textColor" />
+        <!-- textStyle : int normal :0, bold:1 italic:2 -->
+        <attr name="android:textStyle" />
+        <!-- textAlignment : enum -->
+        <attr name="android:textAlignment" />
+        <!-- lines : the "visible" lines bounding, the content can be unlimited -->
+        <attr name="android:minLines" />
+        <attr name="android:maxLines" />
+        <attr name="android:lines" />
+        <!-- singleLine : only one line "input" is available -->
+        <attr name="android:singleLine" />
+        <!-- gravity : int -->
+        <attr name="android:gravity" />
+        <!-- ellipsize : the outlook when no enough space to display -->
+        <attr name="android:ellipsize" />
+        <attr name="android:editable" />
+        <attr name="android:hint" />
+        <!-- inputType : enum -->
+        <attr name="android:inputType" />
+        <!-- End of TextView attribute -->
+
+        <!-- ViewGroup attribute -->
+        <attr name="android:clipChildren" />
+        <attr name="android:clipToPadding" />
+
+    </declare-styleable>
+</resources>

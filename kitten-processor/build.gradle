@@ -23,7 +23,7 @@ dependencies {
     compile deps.android
 }
 
-group kittenGroup
+group = kittenGroup
 version kittenLatestReleaseVersion
 install {
     repositories.mavenInstaller {

@@ -97,7 +97,7 @@ public class KittenBinderProcessor extends AbstractProcessor{
             ClassName className = createClassName(entry.getKey());
             if(className != null) {
                 JavaFile javaFile = JavaFile.builder(className.packageName(), createType(0, className, entry.getValue()))
-                        .addStaticImport(ClassName.get("kittenbinder", "KittenBind"), "setStyle")
+                        .addStaticImport(ClassName.get("com.spring.kittendecorator", "KittenBind"), "setStyle")
                         .build();
                 try {
                     javaFile.writeTo(filer);

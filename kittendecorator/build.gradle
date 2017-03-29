@@ -7,10 +7,10 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion kittenMinSdkVersion
-        targetSdkVersion targetSdkVersion
-        versionCode kittenVersionCode
-        versionName kittenLatestReleaseVersion
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -24,7 +24,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
 }
 
@@ -33,8 +37,8 @@ version kittenLatestReleaseVersion
 install {
     repositories.mavenInstaller {
         pom.project {
-            group = kittenGroup
-            artifactId "kitten-binder"
+            group kittenGroup
+            artifactId "kittendecorator"
             version kittenLatestReleaseVersion
         }
     }
@@ -47,15 +51,14 @@ bintray {
     configurations = ['archives']
     // Package info for BinTray
     pkg {
-        group = kittenGroup
         repo = 'maven'
-        name = 'kitten-binder'
+        name = 'kittendecorator'
         userOrg = user
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/springwong/KittenBinder.git'
         version {
             name = kittenLatestReleaseVersion
-            desc = "Kitten Binder $kittenLatestReleaseVersion"
+            desc = "Kitten Decorator $kittenLatestReleaseVersion"
             vcsTag = kittenLatestReleaseVersion
         }
     }

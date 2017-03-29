@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.spring.kittendecorator.KittenBind;
+
 import kittenbinder.DecoBackground;
 import kittenbinder.BindContext;
 import kittenbinder.DecoEditText;
@@ -23,8 +25,6 @@ import kittenbinder.DecoImageView;
 import kittenbinder.DecoLinearLayout;
 import kittenbinder.DecoPadding;
 import kittenbinder.DecoTextView;
-
-import kittenbinder.KittenBind;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

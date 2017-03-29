@@ -6,9 +6,10 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import kittenbinder.KittenBind;
+import com.spring.kittendecorator.KittenBind;
 
 import kittenbinder.BindContext;
+
 
 /**
  * TODO: document your custom view class.
